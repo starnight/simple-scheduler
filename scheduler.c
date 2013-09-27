@@ -90,7 +90,7 @@ uint8_t SSMainLoop() {
 		/* Schedule and pick a job. */
 		pcb = SSScheduleJob(&(rqs.err));
 		/* Dispatch the job if there is more then one job. */
-		if(rqs.err == SS_READYQUEUEOK) {
+		if(pcb != NULL) {
 			/* Dispatch and execute the job. */
 			SSDispatchJob(pcb);
 			/* Exit the job. */
