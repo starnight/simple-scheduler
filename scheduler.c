@@ -17,13 +17,13 @@ static SDS_RING sys_r;
 /* Ready queue (system ring) memory. */
 static SS_PCB pcbs[SS_READYQUEUESIZE];
 /* Ready queue (system ring) status. */
-static SS_RQSTATUS rqs;
+static SS_SSTATUS ss;
 
 /* Initial the scheduler. */
 void SSInit() {
 	SDSInitRing(&sys_r, SS_READYQUEUESIZE, (void *)pcbs);
-	rqs.err = SS_READYQUEUEOK;
-	rqs.run = SS_RUNSCHEDULING;
+	ss.err = SS_READYQUEUEOK;
+	ss.run = SS_RUNSCHEDULING;
 	return;
 }
 
@@ -32,8 +32,8 @@ uint8_t SSAdmitJob(void *p, SS_CB cb) {
 	SS_PCB pcb;
 	pcb.cb = cb;
 	pcb.p = p;
-	rqs.err = SDSPushRing(&sys_r, &pcb, sizeof(SS_PCB));
-	return rqs.err;
+	ss.err = SDSPushRing(&sys_r, &pcb, sizeof(SS_PCB));
+	return ss.err;
 }
 
 /* Schedule and choose the job. */
@@ -54,7 +54,7 @@ inline uint8_t SSExitJob() {
 
 /* Break scheduling. */
 void SSBreak(uint8_t run) {
-	rqs.run = run;
+	ss.run = run;
 	return;
 }
 
@@ -67,17 +67,17 @@ void SSConsumeLeft(uint8_t m) {
 		/* Make sure the consumed left jobs are under limit. */
 		if((m != 0) && (n >= m)) break;
 		/* Schedule and pick a job. */
-		pcb = SSScheduleJob(&(rqs.err));
+		pcb = SSScheduleJob(&(ss.err));
 		/* Dispatch the job if there is more then one job. */
-		if(rqs.err == SS_READYQUEUEOK) {
+		if(ss.err == SS_READYQUEUEOK) {
 			/* Dispatch and execute the job. */
 			SSDispatchJob(pcb);
 			/* Exit the job. */
-			rqs.err = SSExitJob();
+			ss.err = SSExitJob();
 			/* Counts. */
 			n += 1;
 		}
-	}while(rqs.err == SS_READYQUEUEOK);
+	}while(ss.err == SS_READYQUEUEOK);
 
 	return;
 }
@@ -86,29 +86,29 @@ void SSConsumeLeft(uint8_t m) {
 uint8_t SSMainLoop() {
 	SS_PCB *pcb;
 
-	while(rqs.run == SS_RUNSCHEDULING) {
+	while(ss.run == SS_RUNSCHEDULING) {
 		/* Schedule and pick a job. */
-		pcb = SSScheduleJob(&(rqs.err));
+		pcb = SSScheduleJob(&(ss.err));
 		/* Dispatch the job if there is more then one job. */
 		if(pcb != NULL) {
 			/* Dispatch and execute the job. */
 			SSDispatchJob(pcb);
 			/* Exit the job. */
-			rqs.err = SSExitJob();
+			ss.err = SSExitJob();
 		}
 	}
 
 	/* Consume left jobs if it was break with that request. */
-	if(rqs.run == SS_BREAKANDCONSUMELEFT)
+	if(ss.run == SS_BREAKANDCONSUMELEFT)
 		SSConsumeLeft(0);
 
 	return 0;
 }
 
 /* Have the debug information of the scheduler. */
-SS_RQSTATUS * SSDebug() {
-	rqs.len = sys_r.len;
-	rqs.size = SDSSize(&sys_r);
+SS_SSTATUS * SSDebug() {
+	ss.len = sys_r.len;
+	ss.size = SDSSize(&sys_r);
 
-	return &rqs;
+	return &ss;
 }

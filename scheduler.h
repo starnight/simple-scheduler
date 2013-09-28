@@ -15,12 +15,12 @@
 typedef void (*SS_CB)(void *);
 
 /* Scheduler status. */
-typedef struct _SS_ready_queue_status {
+typedef struct _SS_scheduler_status {
 	uint8_t len;
 	uint8_t size;
 	uint8_t err;
 	uint8_t run;
-} SS_RQSTATUS;
+} SS_SSTATUS;
 
 /* Define the ready queue length. */
 #ifndef SS_READYQUEUESIZE
@@ -48,6 +48,6 @@ void SSBreak(uint8_t);
 /* Consume left jobs in ready queue. */
 void SSConsumeLeft(uint8_t);
 /* Have the debug information of the scheduler. */
-SS_RQSTATUS * SSDebug();
+SS_SSTATUS * SSDebug();
 
 #endif
