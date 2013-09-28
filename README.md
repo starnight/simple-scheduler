@@ -34,6 +34,16 @@ The program will admit jobs and do scheduling demo.
 It will also break scheduling at the time.  
 Besides, also demoes consuming left jobs.
 
+Dependency
+----------
+
+Before compiling, you must have the dependent library
+[Simple Data Structure (SDS)](https://github.com/starnight/simple-data-structure "Simple Data Structure")
+and put it into the subdirectory 'datastructure'.  
+You could put it manually or just use the command "make",
+"[Demo usage](#demo-usage)" talked above, which will check the dependency and
+download automatically if it is needed.
+
 Quick Start
 -----------
 
