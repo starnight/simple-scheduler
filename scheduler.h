@@ -42,7 +42,7 @@ void SSInit();
 /* Admit a job into the ready queue. */
 uint8_t SSAdmitJob(void *, SS_CB);
 /* Main loop for system scheduling. */
-uint8_t SSMainLoop();
+void SSMainLoop();
 /* Break scheduling. */
 void SSBreak(uint8_t);
 /* Consume left jobs in ready queue. */

@@ -83,7 +83,7 @@ void SSConsumeLeft(uint8_t m) {
 }
 
 /* Main loop for system scheduling. */
-uint8_t SSMainLoop() {
+void SSMainLoop() {
 	SS_PCB *pcb;
 
 	while(ss.run == SS_RUNSCHEDULING) {
@@ -102,7 +102,7 @@ uint8_t SSMainLoop() {
 	if(ss.run == SS_BREAKANDCONSUMELEFT)
 		SSConsumeLeft(0);
 
-	return 0;
+	return;
 }
 
 /* Have the debug information of the scheduler. */
