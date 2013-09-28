@@ -46,13 +46,19 @@ void foo0(void *p) {
 
 /* The demo job foo#1. */
 void foo1(void *p) {
+	uint8_t err;
 	printf("\033[1;32mfoo#1\033[m:\t");
-	SSAdmitJob(NULL, foo0);
 	if (p != NULL) {
 		printf("Get parameter \033[1;36m%d\033[m.  ", *((int *) p));
 		free(p);
 	}
-	printf("Admitted a job.\n");
+
+	err = SSAdmitJob(NULL, foo0);
+	if(err == SS_READYQUEUEOK)
+		printf("Admitted a job.\n");
+	else
+		printf("Admitted a job \033[0;33mfailed\033[m.\n\a");
+
 	debug();
 #ifdef DELAYJOB
 	sleep(rand() % DELAYJOB);
@@ -61,9 +67,15 @@ void foo1(void *p) {
 
 /* The demo job foo#2. */
 void foo2(void *p) {
+	uint8_t err;
 	printf("\033[1;33mfoo#2\033[m:\t");
-	SSAdmitJob(NULL, foo1);
-	printf("Admitted a job.\n");
+
+	err = SSAdmitJob(NULL, foo1);
+	if(err == SS_READYQUEUEOK)
+		printf("Admitted a job.\n");
+	else
+		printf("Admitted a job \033[0;33mfailed\033[m.\n\a");
+
 	debug();
 #ifdef DELAYJOB
 	sleep(rand() % DELAYJOB);
@@ -72,6 +84,7 @@ void foo2(void *p) {
 
 /* The callback for time out. */
 void alarm_handler() {
+	uint8_t err;
 	int *r = NULL;
 	int f = rand() % 3;
 	/* Admit the random job which is foo#0 to foo#2. */
@@ -79,10 +92,20 @@ void alarm_handler() {
 	if (f == 1) {
 		r = (int *) malloc(sizeof(int));
 		*r = rand();
-		printf("Pass parameter \033[1;34m%d\033[m.\n", *r);
 	}
+
 	/* Admit the job. */
-	SSAdmitJob(r, cbs[f]);
+	err = SSAdmitJob(r, cbs[f]);
+	if(err == SS_READYQUEUEOK) {
+		printf("Admitted a job");
+		if (f == 1)
+			printf(" with a parameter \033[1;34m%d\033[m.\n", *r);
+		else
+			printf(".\n");
+	}
+	else {
+		printf("Admitted a job \033[0;33mfailed\033[m.\n\a");
+	}
 
 #if MAX_TRIGGER_TIMES > 0
 	/* Check the trigger time. */
