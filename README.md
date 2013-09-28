@@ -31,17 +31,19 @@ $ ./demo.bin
 ```
 
 The program will admit jobs and do scheduling demo.  
-It also will break scheduling at the time.  
+It will also break scheduling at the time.  
 Besides, also demoes consuming left jobs.
 
 Quick Start
 -----------
 
 This example demos the simple scheduler behavior.  
-Firstly, have the unit simulating the interrupt.  It will admit jobs (functions)
-into the ready queue while interrupt is triggered.  Secondary, call the simple
-scheduler main loop (SSMainLoop()) to do the scheduling, which also dispatches
-and executes jobs.
+1. Have the unit simulating the interrupt.  It will admit jobs (functions) into
+   the ready queue while interrupt is triggered.
+2. Initial the simple scheduler with SSInit().
+3. Start to simulate triggering the interrupts talked above.
+4. Call the simple scheduler main loop (SSMainLoop()) to do the scheduling,
+   which also dispatches and executes jobs if it has more than one job.
 
 Create a C file where the main function located.
 
