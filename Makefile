@@ -1,7 +1,7 @@
 CC = cc
 MODULE = datastructure
 INCLUDES = $(addprefix -I,$(MODULE))
-CFLAGS = -Wall -g
+CFLAGS = -Wall -O3
 OBJECTS = $(addsuffix .o,$(MODULE)) scheduler.o
 DEFINE = SS_READYQUEUESIZE=16 TIMER_INTERVAL=2 MAX_TRIGGER_TIMES=20 DELAYJOB=3
 DEFINES = $(addprefix -D,$(DEFINE))
