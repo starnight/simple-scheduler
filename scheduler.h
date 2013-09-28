@@ -14,7 +14,7 @@
 /* Callback function prototype. */
 typedef void (*SS_CB)(void *);
 
-/* Ready queue status. */
+/* Scheduler status. */
 typedef struct _SS_ready_queue_status {
 	uint8_t len;
 	uint8_t size;
@@ -27,17 +27,17 @@ typedef struct _SS_ready_queue_status {
 #define SS_READYQUEUESIZE	8
 #endif
 
-/* Define the ready queue running status. */
+/* Define the scheduler running status. */
 #define SS_RUNSCHEDULING		0
 #define SS_BREAKSCHEDULING		1
 #define SS_BREAKANDCONSUMELEFT	2
 
-/* Define the ready queue error status. */
+/* Define the ready queue status. */
 #define SS_READYQUEUEOK		SDS_OK
 #define SS_READYQUEUEEMPTY	SDS_BUFFEREMPTY
 #define SS_READYQUEUEFULL	SDS_BUFFEROVERFLOW
 
-/* Initial the ready queue (system ring). */
+/* Initial the scheduler. */
 void SSInit();
 /* Admit a job into the ready queue. */
 uint8_t SSAdmitJob(void *, SS_CB);
@@ -47,7 +47,7 @@ uint8_t SSMainLoop();
 void SSBreak(uint8_t);
 /* Consume left jobs in ready queue. */
 void SSConsumeLeft(uint8_t);
-/* Have the debug information of ready queue (system ring). */
+/* Have the debug information of the scheduler. */
 SS_RQSTATUS * SSDebug();
 
 #endif

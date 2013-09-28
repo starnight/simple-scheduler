@@ -19,7 +19,7 @@ static SS_PCB pcbs[SS_READYQUEUESIZE];
 /* Ready queue (system ring) status. */
 static SS_RQSTATUS rqs;
 
-/* Initial the ready queue (system ring). */
+/* Initial the scheduler. */
 void SSInit() {
 	SDSInitRing(&sys_r, SS_READYQUEUESIZE, (void *)pcbs);
 	rqs.err = SS_READYQUEUEOK;
@@ -105,7 +105,7 @@ uint8_t SSMainLoop() {
 	return 0;
 }
 
-/* Have the debug information of ready queue (system ring). */
+/* Have the debug information of the scheduler. */
 SS_RQSTATUS * SSDebug() {
 	rqs.len = sys_r.len;
 	rqs.size = SDSSize(&sys_r);
