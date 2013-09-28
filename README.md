@@ -38,7 +38,8 @@ Quick Start
 -----------
 
 This example demos the simple scheduler behavior.  
-1. Have the unit simulating the interrupt.  It will admit jobs (functions) into
+
+1. Have the unit simulating the interrupt. It will admit jobs (functions) into
    the ready queue while interrupt is triggered.
 2. Initial the simple scheduler with SSInit().
 3. Start to simulate triggering the interrupts talked above.
