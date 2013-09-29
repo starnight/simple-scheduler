@@ -1,7 +1,8 @@
 Simple Scheduler
 ================
 
-It is a simple scheduler library which does scheduling works.
+It is a simple scheduler library which does scheduling works with no priority
+and non-preemptive multitasking.
 
 Find more information from the [Wiki](https://github.com/starnight/simple-scheduler/wiki "Simple Scheduler Wiki").
 
