@@ -106,9 +106,9 @@ void SSMainLoop() {
 }
 
 /* Have the debug information of the scheduler. */
-SS_SSTATUS * SSDebug() {
+SS_SSTATUS SSDebug() {
 	ss.len = sys_r.len;
 	ss.size = SDSSize(&sys_r);
 
-	return &ss;
+	return ss;
 }

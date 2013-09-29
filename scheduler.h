@@ -48,6 +48,6 @@ void SSBreak(uint8_t);
 /* Consume left jobs in ready queue. */
 void SSConsumeLeft(uint8_t);
 /* Have the debug information of the scheduler. */
-SS_SSTATUS * SSDebug();
+SS_SSTATUS SSDebug();
 
 #endif

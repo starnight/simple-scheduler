@@ -26,12 +26,12 @@ unsigned int tc;
 
 /* Show the scheduler debug information. */
 inline void debug() {
-	SS_SSTATUS *ss;
+	SS_SSTATUS ss;
 	ss = SSDebug();
-	printf("The ready queue size is %d.\n", (int)ss->len);
-	printf("Remain %d callback functions.\n", (int)ss->size);
-	printf("The ready queue error status is %d.\n", (int)ss->err);
-	printf("The scheduler status is %d.\n", (int)ss->run);
+	printf("The ready queue size is %d.\n", (int)ss.len);
+	printf("Remain %d callback functions.\n", (int)ss.size);
+	printf("The ready queue error status is %d.\n", (int)ss.err);
+	printf("The scheduler status is %d.\n", (int)ss.run);
 	return;
 }
 
