@@ -3,6 +3,8 @@ Simple Scheduler
 
 It is a simple scheduler library which does scheduling works with no priority
 and non-preemptive multitasking.
+It is the "Functions", which could also be called callback functions or jobs,
+that Simple Scheduler schedules, not the "Processes".
 
 Find more information from the [Wiki](https://github.com/starnight/simple-scheduler/wiki "Simple Scheduler Wiki").
 
