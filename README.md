@@ -1,7 +1,7 @@
 Simple Scheduler
 ================
 
-It is a simple scheduler library which does scheduling works with no priority
+It is a simple scheduler library which does "First In, First Out" (FIFO) scheduling works with no priority
 and non-preemptive multitasking.
 It is the "Functions", which could also be called callback functions or jobs,
 that Simple Scheduler schedules, not the "Processes".
