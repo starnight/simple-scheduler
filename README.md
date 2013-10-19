@@ -26,7 +26,7 @@ Before compile this library, you must have the compiler, for example GCC, of
 course.  There is a demo code which is '[demo.c](demo.c)'.  You can just use the
 'make' utility which will download the dependency with git and compile the codes
 according to the 'Makefile'.  Then execute the program 'demo.bin' for demo.  I
-also use the program to test the APIs I wrote working right or wrong.
+also use the program to test the APIs that I wrote working right or wrong.
 
 ```
 $ make
