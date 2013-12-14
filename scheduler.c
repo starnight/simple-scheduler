@@ -37,18 +37,18 @@ uint8_t SSAdmitJob(void *p, SS_CB cb) {
 }
 
 /* Schedule and choose the job. */
-inline SS_PCB * SSScheduleJob(uint8_t *err) {
+static inline SS_PCB * SSScheduleJob(uint8_t *err) {
 	return (SS_PCB *)SDSFrontRing(&sys_r, sizeof(SS_PCB), err);
 }
 
 /* Dispatch and execute the job. */
-inline void SSDispatchJob(SS_PCB *pcb) {
+static inline void SSDispatchJob(SS_PCB *pcb) {
 	pcb->cb(pcb->p);
 	return;
 }
 
 /* Exit the job. */
-inline uint8_t SSExitJob() {
+static inline uint8_t SSExitJob() {
 	return SDSPopRing(&sys_r);
 }
 
