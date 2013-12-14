@@ -38,16 +38,16 @@ typedef struct _SS_scheduler_status {
 #define SS_READYQUEUEFULL	SDS_BUFFEROVERFLOW
 
 /* Initial the scheduler. */
-void SSInit();
+void SSInit(void);
 /* Admit a job into the ready queue. */
 uint8_t SSAdmitJob(void *, SS_CB);
 /* Main loop for system scheduling. */
-void SSMainLoop();
+void SSMainLoop(void);
 /* Break scheduling. */
 void SSBreak(uint8_t);
 /* Consume left jobs in ready queue. */
 void SSConsumeLeft(uint8_t);
 /* Have the debug information of the scheduler. */
-SS_SSTATUS SSDebug();
+SS_SSTATUS SSDebug(void);
 
 #endif

@@ -20,7 +20,7 @@ static SS_PCB pcbs[SS_READYQUEUESIZE];
 static SS_SSTATUS ss;
 
 /* Initial the scheduler. */
-void SSInit() {
+void SSInit(void) {
 	SDSInitRing(&sys_r, SS_READYQUEUESIZE, (void *)pcbs);
 	ss.err = SS_READYQUEUEOK;
 	ss.run = SS_RUNSCHEDULING;
@@ -48,7 +48,7 @@ static inline void SSDispatchJob(SS_PCB *pcb) {
 }
 
 /* Exit the job. */
-static inline uint8_t SSExitJob() {
+static inline uint8_t SSExitJob(void) {
 	return SDSPopRing(&sys_r);
 }
 
@@ -83,7 +83,7 @@ void SSConsumeLeft(uint8_t m) {
 }
 
 /* Main loop for system scheduling. */
-void SSMainLoop() {
+void SSMainLoop(void) {
 	SS_PCB *pcb;
 
 	while(ss.run == SS_RUNSCHEDULING) {
@@ -106,7 +106,7 @@ void SSMainLoop() {
 }
 
 /* Have the debug information of the scheduler. */
-SS_SSTATUS SSDebug() {
+SS_SSTATUS SSDebug(void) {
 	ss.len = sys_r.len;
 	ss.size = SDSSize(&sys_r);
 
