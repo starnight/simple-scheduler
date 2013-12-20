@@ -22,6 +22,12 @@ typedef struct _SS_scheduler_status {
 	uint8_t run;
 } SS_SSTATUS;
 
+/* Packaged callback function. */
+typedef struct _SS_PACKAGED_CALLBACK {
+	SS_CB cb;
+	void *p;
+} SS_PCB;
+
 /* Define the ready queue length. */
 #ifndef SS_READYQUEUESIZE
 #define SS_READYQUEUESIZE	8

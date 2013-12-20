@@ -6,12 +6,6 @@
 
 #include "scheduler.h"
 
-/* Packaged callback function. */
-typedef struct _SS_PACKAGED_CALLBACK {
-	SS_CB cb;
-	void *p;
-} SS_PCB;
-
 /* System ring for scheduler. */
 static SDS_RING sys_r;
 /* Ready queue (system ring) memory. */
