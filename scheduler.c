@@ -57,6 +57,9 @@ void SSConsumeLeft(uint8_t m) {
 	SS_PCB *pcb;
 	uint8_t n = 0;
 
+	/* Set scheduler state to break & consume left jobs. */
+	ss.run = SS_BREAKANDCONSUMELEFT;
+
 	do {
 		/* Make sure the consumed left jobs are under limit. */
 		if((m != 0) && (n >= m)) break;
@@ -72,6 +75,9 @@ void SSConsumeLeft(uint8_t m) {
 			n += 1;
 		}
 	}while(ss.err == SS_READYQUEUEOK);
+
+	/* Consuming is finished, and set scheduler state to break. */
+	ss.run = SS_BREAKSCHEDULING;
 
 	return;
 }
